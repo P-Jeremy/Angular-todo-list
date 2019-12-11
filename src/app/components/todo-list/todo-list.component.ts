@@ -38,6 +38,11 @@ export class TodoListComponent implements OnInit {
   }
 
   onToggle(todo: Todo) {
-    console.log("COUCOU", todo);
+    return this.todoService
+      .updateTodo(todo)
+      /** Will cancel subscription when a new value is emitted for the $destroy Subject */
+      .pipe(takeUntil(this.$destroy))
+      /** Can be compared to .then() on promises */
+      .subscribe(todo => (console.log("UPDATE OK on :", todo)));
   }
 }

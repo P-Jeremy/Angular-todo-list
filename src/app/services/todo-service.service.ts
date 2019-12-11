@@ -7,7 +7,7 @@ import { HttpClient } from "@angular/common/http";
   providedIn: "root"
 })
 export class TodoServiceService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getTodos(): Observable<Todo[]> {
     return this.http.get<Todo[]>(
@@ -19,6 +19,13 @@ export class TodoServiceService {
     return this.http.post<Todo>(
       "https://jsonplaceholder.typicode.com/todos",
       obj
+    );
+  }
+
+  updateTodo(todo: Todo): Observable<Todo> {
+    return this.http.put<Todo>(
+      `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
+      todo
     );
   }
 
