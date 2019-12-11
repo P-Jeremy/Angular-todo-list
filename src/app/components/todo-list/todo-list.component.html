@@ -1,0 +1,12 @@
+<div>
+  <mat-toolbar color="primary">
+    {{ title }}
+  </mat-toolbar>
+  <mat-list role="list">
+    <app-todo-item
+      *ngFor="let todo of todoList"
+      [todo]="todo"
+      (toggle)="onToggle($event)"
+    ></app-todo-item>
+  </mat-list>
+</div>

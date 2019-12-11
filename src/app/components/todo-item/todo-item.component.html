@@ -1,0 +1,13 @@
+<mat-list-item role="list-item">
+  <p>
+    <input
+      type="checkbox"
+      [checked]="todo.completed"
+      (change)="onToggle(todo)"
+    />
+    <span [ngClass]="todo.completed ? 'completed' : ''">
+      {{ todo.title }}
+    </span>
+    <mat-icon class="removeIcon">clear</mat-icon>
+  </p>
+</mat-list-item>

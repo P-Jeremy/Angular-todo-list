@@ -1,0 +1,12 @@
+p {
+  display: flex;
+  align-items: center;
+}
+
+.removeIcon {
+  margin-left: 1rem;
+}
+
+.completed {
+  text-decoration: line-through;
+}
