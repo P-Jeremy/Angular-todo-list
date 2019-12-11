@@ -20,7 +20,7 @@ export class TodoListComponent implements OnInit {
   private $destroy = new Subject<void>();
 
   /** The todoService is injected in the constructor */
-  constructor(private todoService: TodoServiceService) {}
+  constructor(private todoService: TodoServiceService) { }
 
   ngOnInit() {
     this.todoService
@@ -37,5 +37,7 @@ export class TodoListComponent implements OnInit {
     this.$destroy.next();
   }
 
-  onToggle() {}
+  onToggle(todo: Todo) {
+    console.log("COUCOU", todo);
+  }
 }

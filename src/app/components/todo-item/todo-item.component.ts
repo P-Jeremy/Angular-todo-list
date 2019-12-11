@@ -1,6 +1,5 @@
-import { Component, OnInit, Input, Output } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { Todo } from "src/app/models/todo";
-import { EventEmitter } from "events";
 
 @Component({
   selector: "app-todo-item",
@@ -10,17 +9,17 @@ import { EventEmitter } from "events";
 export class TodoItemComponent implements OnInit {
   /** Value comming from parent mapping */
   @Input() todo: Todo;
-  @Output() toggle: EventEmitter = new EventEmitter();
-  constructor() {}
+  @Output() onToggle: EventEmitter<Todo> = new EventEmitter();
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   /**
    * Allows to change the completed property on todo item
    * @param todo
    */
-  onToggle(todo: Todo) {
+  onToggleClick(todo: Todo) {
     todo.completed = !todo.completed;
-    return this.toggle.emit(null);
+    return this.onToggle.emit(todo);
   }
 }
