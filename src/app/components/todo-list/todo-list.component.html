@@ -2,6 +2,7 @@
   <mat-toolbar color="primary">
     {{ title }}
   </mat-toolbar>
+  <app-todo-input></app-todo-input>
   <mat-list role="list">
     <app-todo-item *ngFor="let todo of todoList" [todo]="todo" (onToggle)="onToggle($event)"></app-todo-item>
   </mat-list>

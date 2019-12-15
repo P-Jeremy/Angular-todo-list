@@ -32,11 +32,12 @@ export class TodoListComponent implements OnInit {
       .subscribe(todos => (this.todoList = todos));
   }
 
-  OnDestroy() {
-    /** Emit a new value onDestroy */
-    this.$destroy.next();
-  }
 
+  /**
+   * Allows to update the todo item on JsonPlaceholder,
+   * triggered by the event emitted from todo-item component
+   * @param todo 
+   */
   onToggle(todo: Todo) {
     return this.todoService
       .updateTodo(todo)
@@ -44,5 +45,10 @@ export class TodoListComponent implements OnInit {
       .pipe(takeUntil(this.$destroy))
       /** Can be compared to .then() on promises */
       .subscribe(todo => (console.log("UPDATE OK on :", todo)));
+  }
+
+  OnDestroy() {
+    /** Emit a new value onDestroy */
+    this.$destroy.next();
   }
 }

@@ -1,0 +1,16 @@
+<form [formGroup]="todoInput" (ngSubmit)="onSubmit(todoInput)">
+  <p><abbr title="(obligatoire)" aria-hidden="true">*</abbr> obligatoire</p>
+  <mat-form-field>
+    <mat-label>Nouvelle tâche:</mat-label>
+    <input formControlName="todo" type="text" matInput placeholder="tâche">
+  </mat-form-field>
+  <button mat-raised-button type="submit" [disabled]="" class="">Ajouter</button>
+</form>
+<div *ngIf="(submitted) && todoInput.controls['todo'].errors">
+  <div *ngIf="todoInput.controls['todo'].errors?.required">
+    Champs obligatoire
+  </div>
+  <div *ngIf="todoInput.controls['todo'].hasError('minlength')">
+    5 charactères minimum
+  </div>
+</div>

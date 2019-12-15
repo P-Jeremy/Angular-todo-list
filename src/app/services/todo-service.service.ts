@@ -29,6 +29,15 @@ export class TodoServiceService {
     );
   }
 
+  addTodo(todo: Todo): Observable<Todo> {
+    console.log("TODO", todo);
+
+    return this.http.post<Todo>(
+      `https://jsonplaceholder.typicode.com/todos`,
+      todo
+    );
+  }
+
   deleteTodo(id: string): Observable<Todo> {
     return this.http.delete<Todo>(
       `https://jsonplaceholder.typicode.com/todos/${id}`
