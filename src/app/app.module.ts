@@ -6,7 +6,8 @@ import {
   MatIconModule,
   MatFormFieldModule,
   MatInputModule,
-  MatButtonModule
+  MatButtonModule,
+  MatCardModule
 } from "@angular/material";
 
 import { NgModule } from "@angular/core";
@@ -30,7 +31,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

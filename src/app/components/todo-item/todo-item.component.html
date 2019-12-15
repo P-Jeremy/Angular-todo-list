@@ -4,6 +4,8 @@
     <span [ngClass]="todo.completed ? 'completed' : ''">
       {{ todo.title }}
     </span>
-    <mat-icon class="removeIcon">clear</mat-icon>
+    <button (click)="onDelete(todo.id)" class="removeButton" mat-raised-button color="warn">
+      X
+    </button>
   </p>
 </mat-list-item>

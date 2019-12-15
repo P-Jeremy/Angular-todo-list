@@ -1,0 +1,9 @@
+form p {
+  color: grey;
+  font-size: 0.7rem;
+}
+
+.errors {
+  color: red;
+  font-size: 0.7rem;
+}

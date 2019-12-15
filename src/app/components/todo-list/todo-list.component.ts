@@ -20,16 +20,22 @@ export class TodoListComponent implements OnInit {
   private $destroy = new Subject<void>();
 
   /** The todoService is injected in the constructor */
-  constructor(private todoService: TodoServiceService) { }
+  constructor(private todoService: TodoServiceService) {
+  }
 
   ngOnInit() {
-    this.todoService
-      /** When can access the methods and values of the service */
-      .getTodos()
-      /** Will cancel subscription when a new value is emitted for the $destroy Subject */
-      .pipe(takeUntil(this.$destroy))
-      /** Can be compared to .then() on promises */
-      .subscribe(todos => (this.todoList = todos));
+    this.todoService.getTodos();
+    setTimeout(() => {
+      this.todoService
+        /** When can access the methods and values of the service */
+        .getTodoObservable()
+        /** Will cancel subscription when a new value is emitted for the $destroy Subject */
+        .pipe(takeUntil(this.$destroy))
+        /** Can be compared to .then() on promises */
+        .subscribe(todos => {
+          this.todoList = todos
+        });
+    }, 0);
   }
 
 
@@ -39,12 +45,7 @@ export class TodoListComponent implements OnInit {
    * @param todo 
    */
   onToggle(todo: Todo) {
-    return this.todoService
-      .updateTodo(todo)
-      /** Will cancel subscription when a new value is emitted for the $destroy Subject */
-      .pipe(takeUntil(this.$destroy))
-      /** Can be compared to .then() on promises */
-      .subscribe(todo => (console.log("UPDATE OK on :", todo)));
+    return this.todoService.updateTodo(todo)
   }
 
   OnDestroy() {

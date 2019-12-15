@@ -21,17 +21,13 @@ export class TodoInputComponent implements OnInit {
     });
   }
 
-  onSubmit(e) {
+  onSubmit(e: string) {
     this.submitted = true;
-    // stop here if form is invalid
     if (this.todoInput.invalid) {
-      setTimeout(() => {
-        this.submitted = false;
-      }, 800);
       return;
     }
     const newTodo: Todo = {
-      title: e.value.todo,
+      title: e,
       completed: false,
     }
     return this.todoService.addTodo(newTodo)

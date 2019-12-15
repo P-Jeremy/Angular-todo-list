@@ -1,46 +1,57 @@
 import { Injectable } from "@angular/core";
 import { Todo } from "../models/todo";
-import { Observable } from "rxjs";
+import { Observable, of, Subscription } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 
 @Injectable({
   providedIn: "root"
 })
 export class TodoServiceService {
+  private todos: Todo[]
   constructor(private http: HttpClient) { }
 
-  getTodos(): Observable<Todo[]> {
+  getTodoObservable(): Observable<Todo[]> {
+    return of(this.todos)
+  }
+
+
+  getTodos(): Subscription {
     return this.http.get<Todo[]>(
       "https://jsonplaceholder.typicode.com/todos?_limit=5"
-    );
+    ).subscribe(todos => {
+      this.todos = todos
+    })
   }
 
-  postTodo(obj: Todo): Observable<Todo> {
-    return this.http.post<Todo>(
-      "https://jsonplaceholder.typicode.com/todos",
-      obj
-    );
-  }
-
-  updateTodo(todo: Todo): Observable<Todo> {
+  updateTodo(todo: Todo): Subscription {
     return this.http.put<Todo>(
       `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
       todo
-    );
+    ).subscribe(updatedTodo => {
+      this.todos.some(t => {
+        if (t.id === todo.id) {
+          return t.completed = updatedTodo.completed
+        }
+      });
+
+    })
   }
 
-  addTodo(todo: Todo): Observable<Todo> {
-    console.log("TODO", todo);
-
+  addTodo(todo: Todo): Subscription {
     return this.http.post<Todo>(
       `https://jsonplaceholder.typicode.com/todos`,
       todo
-    );
+    ).subscribe(todo => {
+      return this.todos.push(todo)
+    })
   }
 
-  deleteTodo(id: string): Observable<Todo> {
+  deleteTodo(id: string): Subscription {
     return this.http.delete<Todo>(
       `https://jsonplaceholder.typicode.com/todos/${id}`
-    );
+    ).subscribe(() => {
+      const removeIndex = this.todos.map(function (item) { return item.id; }).indexOf(Number(id));
+      return this.todos.splice(removeIndex, 1);
+    })
   }
 }
