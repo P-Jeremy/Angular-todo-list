@@ -24,7 +24,6 @@ export class TodoListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.todoService.getTodos();
     setTimeout(() => {
       this.todoService
         /** When can access the methods and values of the service */
@@ -36,6 +35,7 @@ export class TodoListComponent implements OnInit {
           this.todoList = todos
         });
     }, 0);
+
   }
 
 

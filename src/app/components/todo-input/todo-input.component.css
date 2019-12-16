@@ -1,9 +1,10 @@
-form p {
+
+form p:first-of-type{
   color: grey;
   font-size: 0.7rem;
 }
 
-.errors {
+.errorContainer .errors {
   color: red;
   font-size: 0.7rem;
 }
