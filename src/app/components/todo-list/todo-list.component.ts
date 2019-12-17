@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { TodoServiceService } from "./../../services/todo-service.service";
 import { Todo } from "src/app/models/todo";
-import { Subject } from "rxjs";
+import { Subject, Subscription } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 
 @Component({
@@ -10,23 +10,21 @@ import { takeUntil } from "rxjs/operators";
   styleUrls: ["./todo-list.component.css"]
 })
 export class TodoListComponent implements OnInit {
-  /** Array of todos */
-  todoList: Todo[];
-
   /** Title */
   title: string = "Todo list";
-
+  /** Array of todos */
+  todoList: Todo[];
   /** Subject that will handle the unsubscribe */
   private $destroy = new Subject<void>();
-
-  /** The todoService is injected in the constructor */
+  /** The todoService is injected in the component constructor */
   constructor(private todoService: TodoServiceService) {
   }
 
   ngOnInit() {
+    this.todoService.getTodos();
     setTimeout(() => {
       this.todoService
-        /** When can access the methods and values of the service */
+        /** Whe can access the service methods and values */
         .getTodoObservable()
         /** Will cancel subscription when a new value is emitted for the $destroy Subject */
         .pipe(takeUntil(this.$destroy))
@@ -34,8 +32,7 @@ export class TodoListComponent implements OnInit {
         .subscribe(todos => {
           this.todoList = todos
         });
-    }, 0);
-
+    }, 100);
   }
 
 
@@ -43,8 +40,9 @@ export class TodoListComponent implements OnInit {
    * Allows to update the todo item on JsonPlaceholder,
    * triggered by the event emitted from todo-item component
    * @param todo 
+   * @returns a subscription
    */
-  onToggle(todo: Todo) {
+  onToggle(todo: Todo): Subscription {
     return this.todoService.updateTodo(todo)
   }
 

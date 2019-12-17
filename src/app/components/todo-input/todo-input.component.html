@@ -1,5 +1,5 @@
 <form [formGroup]="todoInput" (ngSubmit)="onSubmit(todoInput.value.todo)">
-  <p><abbr title="(obligatoire)" aria-hidden="true">*</abbr> obligatoire</p>
+  <p><abbr title="(obligatoire)" aria-hidden="true">*</abbr>Champs obligatoire</p>
   <mat-form-field>
     <mat-label for="todo">Nouvelle tâche: </mat-label>
     <input id="todo" required formControlName="todo" type="text" matInput placeholder="tâche" autocomplete="off">

@@ -14,12 +14,12 @@ export class TodoServiceService {
     return of(this.todos)
   }
 
-
   getTodos(): Subscription {
     return this.http.get<Todo[]>(
       "https://jsonplaceholder.typicode.com/todos?_limit=5"
     ).subscribe(todos => {
       this.todos = todos
+      console.log("GET", this.todos);
     })
   }
 
@@ -27,13 +27,13 @@ export class TodoServiceService {
     return this.http.put<Todo>(
       `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
       todo
-    ).subscribe(updatedTodo => {
+    ).subscribe((updatedTodo) => {
+      console.log("UPDATE", updatedTodo);
       this.todos.some(t => {
         if (t.id === todo.id) {
           return t.completed = updatedTodo.completed
         }
       });
-
     })
   }
 
@@ -42,6 +42,7 @@ export class TodoServiceService {
       `https://jsonplaceholder.typicode.com/todos`,
       todo
     ).subscribe(todo => {
+      console.log("ADD", todo);
       return this.todos.push(todo)
     })
   }
@@ -50,6 +51,7 @@ export class TodoServiceService {
     return this.http.delete<Todo>(
       `https://jsonplaceholder.typicode.com/todos/${id}`
     ).subscribe(() => {
+      console.log("REMOVE", this.todos[id]);
       const removeIndex = this.todos.map(function (item) { return item.id; }).indexOf(Number(id));
       return this.todos.splice(removeIndex, 1);
     })

@@ -9,7 +9,6 @@ import { Todo } from 'src/app/models/todo';
   styleUrls: ['./todo-input.component.css']
 })
 export class TodoInputComponent implements OnInit {
-
   todoInput: FormGroup
   submitted: Boolean = false;
   constructor(private formbuilder: FormBuilder, private todoService: TodoServiceService) {
@@ -30,7 +29,8 @@ export class TodoInputComponent implements OnInit {
       title: e,
       completed: false,
     }
-    return this.todoService.addTodo(newTodo)
+    this.todoService.addTodo(newTodo)
+    this.todoInput.reset()
   }
 
 }
