@@ -11,7 +11,7 @@ export class TodoItemComponent implements OnInit {
   /** Value comming from the parent mapping */
   @Input() todo: Todo;
   /** Event that triggers a method in the parent */
-  @Output() onToggle: EventEmitter<Todo> = new EventEmitter();
+  @Output() onToggleChild: EventEmitter<Todo> = new EventEmitter();
   constructor(
     private todoService: TodoServiceService
   ) { }
@@ -24,7 +24,7 @@ export class TodoItemComponent implements OnInit {
    */
   onToggleClick(todo: Todo) {
     todo.completed = !todo.completed;
-    return this.onToggle.emit(todo);
+    return this.onToggleChild.emit(todo);
   }
 
   onDelete(id: string) {

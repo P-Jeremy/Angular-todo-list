@@ -42,7 +42,7 @@ export class TodoListComponent implements OnInit {
    * @param todo 
    * @returns a subscription
    */
-  onToggle(todo: Todo): Subscription {
+  onToggleParent(todo: Todo): Subscription {
     return this.todoService.updateTodo(todo)
   }
 

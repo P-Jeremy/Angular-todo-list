@@ -3,9 +3,12 @@
     {{ title }}
   </mat-toolbar>
   <mat-card>
+    <!-- todo input -->
     <app-todo-input></app-todo-input>
     <mat-list role="list">
-      <app-todo-item *ngFor="let todo of todoList" [todo]="todo" (onToggle)="onToggle($event)"></app-todo-item>
+      <!-- Mapping todoItems on the todoList Array -->
+      <app-todo-item *ngFor="let todo of todoList" [todo]="todo" (onToggleChild)="onToggleParent($event)">
+      </app-todo-item>
     </mat-list>
   </mat-card>
 </div>

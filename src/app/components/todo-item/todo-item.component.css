@@ -1,7 +1,3 @@
-p {
-  display: flex;
-  align-items: center;
-}
 
 .removeButton {
   margin-left: 1rem ;
@@ -9,4 +5,9 @@ p {
 
 .completed {
   text-decoration: line-through;
+}
+
+p {
+  display: flex;
+  align-items: center;
 }

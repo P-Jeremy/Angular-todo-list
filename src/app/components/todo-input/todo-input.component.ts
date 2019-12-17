@@ -21,16 +21,16 @@ export class TodoInputComponent implements OnInit {
   }
 
   onSubmit(e: string) {
-    this.submitted = true;
     if (this.todoInput.invalid) {
       return;
     }
+    this.submitted = true;
     const newTodo: Todo = {
       title: e,
       completed: false,
     }
     this.todoService.addTodo(newTodo)
-    this.todoInput.reset()
+    return this.todoInput.reset()
   }
 
 }
